@@ -51,7 +51,7 @@ class _PracticePageState extends State<PracticePage> {
                 height: 43.h,
               ),
               //list of recommend music
-              Options(
+              OptionsWidget(
                 data: recommended,
               ),
             ]),
@@ -137,9 +137,9 @@ class MusicCategories extends StatelessWidget {
   }
 }
 
-class Options extends StatelessWidget {
+class OptionsWidget extends StatelessWidget {
   final List? data;
-  const Options({
+  const OptionsWidget({
     Key? key,
     required this.data,
   }) : super(key: key);
