@@ -15,42 +15,44 @@ class PracticePage extends StatefulWidget {
 }
 
 class _PracticePageState extends State<PracticePage> {
- RecommendeSongsModel? recommendeSongItem;
+List? recommended;
   @override
   void initState() {
-   
+    recommended = recommendedSongs;
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //TODO:LINEAR GRADIENT
-       backgroundColor: const Color.fromRGBO(40, 0, 71, 1),
-       body: SafeArea(
-         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // search box 
-            const SearchAvatar(),
-            // it contains browse text
-            const BrowseText(),
-          SizedBox(
-            height: 250.h,
-            child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: ((context, index) =>   const SampleCard())),
-          ),
-          //list of music category
-            const MusicCategories(),
-            SizedBox(height: 43.h,),
-            //list of recommend music
-            const RecommentedMusic()
-           
-          ]
-       ),
-    )
-    );
+        //TODO:LINEAR GRADIENT
+        backgroundColor: const Color.fromRGBO(40, 0, 71, 1),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              // search box
+              const SearchAvatar(),
+              // it contains browse text
+              const BrowseText(),
+              SizedBox(
+                height: 250.h,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 5,
+                    itemBuilder: ((context, index) => const SampleCard())),
+              ),
+              //list of music category
+              const MusicCategories(),
+              SizedBox(
+                height: 43.h,
+              ),
+              //list of recommend music
+              OptionsWidget(
+                data: recommended,
+              ),
+            ]),
+          )));
+      
   }
 }
 
@@ -125,9 +127,10 @@ class MusicCategories extends StatelessWidget {
   }
 }
 
-class RecommentedMusic extends StatelessWidget {
-  const RecommentedMusic({
-    Key? key,
+class OptionsWidget extends StatelessWidget {
+  final List? data;
+  const OptionsWidget({
+    Key? key, this.data,
   }) : super(key: key);
 
   @override
