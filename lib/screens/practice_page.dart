@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_two/utilts/colors.dart';
+import 'package:project_two/utilts/data.dart';
 import 'package:project_two/utilts/text_styles.dart';
 
 class PracticePage extends StatelessWidget {
@@ -118,39 +120,68 @@ class RecommentedMusic extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200.w,
+    return Container(
+      
+      width: 1.sw,
       height: 300.h,
       child: ListView.separated(itemBuilder:((context, index) {
         return Padding(
           padding: EdgeInsets.only(left: 24.h),
-          child: ListTile(
-            leading: Container(
-              width: 60.w,
-              height: 60.h,
-              decoration: const BoxDecoration(
-               image: DecorationImage(image: NetworkImage('https://c.saavncdn.com/804/Urban-Mood-English-2018-20180226044503-500x500.jpg'))
-              ),
-            ),
-            title: Text("Born To Die",
-            style: tsS16C0xW600 ,
-            ),
-            subtitle: Padding(
-              padding:  EdgeInsets.only(top:3.h ),
-              child: Text('Lena Del Rey',
-              style:tsS13C0xW500 ,
-              ),
-            ),
-            //TODO:svg issue
-           // trailing: Icon(Icons),
-          ),
+          child:  MusicTile(url: recommendedSongs[index]['url'],name: recommendedSongs[index]['name'].toString().toUpperCase(),artist: recommendedSongs[index]['artist'],),
         );
     
       }),
        separatorBuilder: ((context, index) {
          return Divider(height: 5.h,);
        }),
-        itemCount: 10),
+        itemCount: recommendedSongs.length),
+    );
+  }
+}
+
+class MusicTile extends StatelessWidget {
+  final String name;
+  final String artist;
+  final String url;
+
+  const MusicTile({
+    required this.name,
+    required this.artist,
+    required this.url,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Container(
+        width: 60.w,
+        height: 60.h,
+        decoration:  BoxDecoration(
+         image: DecorationImage(image: NetworkImage(url))
+        ),
+      ),
+      title: Text(name,
+      style: tsS16C0xW600 ,
+      ),
+      subtitle: Padding(
+        padding:  EdgeInsets.only(top:3.h ),
+        child: Text(artist,
+        style:tsS13C0xW500 ,
+        ),
+      ),
+
+      trailing: SizedBox(
+        width: 30.w,
+        height: 30.h,
+        child: Row(
+          children: [
+            SvgPicture.asset("assets/svg/Ellipse 2.svg"),
+            SizedBox(width: 5.w,),
+            SvgPicture.asset("assets/svg/Ellipse 2.svg")
+          ],
+        ),
+      ),
     );
   }
 }
