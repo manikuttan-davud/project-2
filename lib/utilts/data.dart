@@ -16,5 +16,7 @@ List recommendedSongs = [
     'artist': 'Lena Del Rey3',
     'url':
         'https://upload.wikimedia.org/wikipedia/commons/2/25/Sachin_Tendulkar_at_MRF_Promotion_Event.jpg'
-  },
+  }
 ];
+
+

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_two/screens/practice_page.dart';
+import 'package:project_two/screens/try_out.dart';
 
 
 void main() {

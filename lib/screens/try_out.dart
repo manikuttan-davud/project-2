@@ -9,22 +9,20 @@ import 'package:project_two/utilts/data.dart';
 import 'package:project_two/utilts/data_two.dart';
 import 'package:project_two/utilts/text_styles.dart';
 
-class PracticePage extends StatefulWidget {
-  const PracticePage({super.key});
+class TryOutPage extends StatefulWidget {
+  const TryOutPage({super.key});
 
   @override
-  State<PracticePage> createState() => _PracticePageState();
+  State<TryOutPage> createState() => _TryOutPageState();
 }
 
-class _PracticePageState extends State<PracticePage> {
+class _TryOutPageState extends State<TryOutPage> {
   //TODO: This is a comment
   //TODO: This is another comment.
   List? recommended;
-  List? sample;
   @override
   void initState() {
     recommended = recommendedSongs;
-    sample=sampleCardSongs;
     super.initState();
   }
 
@@ -53,9 +51,11 @@ class _PracticePageState extends State<PracticePage> {
                               builder: (context) => const SampleCardPage()),
                         ),
                         child: SampleCard(
-                          category: sample?[index]['category'],
-                          name: sample![index]['name'].toString().toUpperCase(),
-                          url: sample?[index]['url'],
+                          category: sampleCardSongs[index]['category'],
+                          name: sampleCardSongs[index]['name']
+                              .toString()
+                              .toUpperCase(),
+                          url: sampleCardSongs[index]['url'],
                         ),
                       ))),
             ),
@@ -127,57 +127,25 @@ class MusicCategories extends StatefulWidget {
   State<MusicCategories> createState() => _MusicCategoriesState();
 }
 
-class _MusicCategoriesState extends State<MusicCategories> {
-  List items = ["Recommended", "Popular", "New Music"];
-  List options = [
-    const OptionsWidget(),
-    const OptionsWidget2(),
-    const OptionsWidget3(),
-  ];
-  int current = 0;
+class _MusicCategoriesState extends State<MusicCategories> with SingleTickerProviderStateMixin {
+  TabController? _tabController;
+  @override
+  void initState() {
+  TabController _tabController = TabController(length: 3, vsync:this);
+    super.initState();
+  }
+ 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(25),
-      child: SizedBox(
-          height: 50.h,
-          width: 1.sw,
-          child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: ((context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      current = index;
-                      Visibility(
-                          visible: current == index, 
-                          child: options[index]);
-                    });
-                  },
-                  child: Container(
-                    width: 120.w,
-                    height: 45.h,
-                    decoration: BoxDecoration(
-                        color: current == index
-                            ? Colors.black
-                            : const Color.fromRGBO(40, 0, 71, 1),
-                        border: current == index
-                            ? Border.all(color: Colors.white)
-                            : null),
-                    child: Center(
-                        child: Text(
-                      items[index],
-                      style: tsS16C0xW700,
-                    )),
-                  ),
-                );
-              }),
-              separatorBuilder: ((context, index) {
-                return SizedBox(
-                  width: 10.w,
-                );
-              }),
-              itemCount: items.length)),
+    return SizedBox(
+      width: 1.sw,
+      child: TabBar(
+        controller: _tabController,
+        tabs: const [
+        Tab(text: 'Recommendation',),
+        Tab(text: 'Recommendation',),
+        Tab(text: 'Recommendation',)
+      ]),
     );
     // Row(
     //children: [
