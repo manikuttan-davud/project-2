@@ -7,7 +7,7 @@ import 'package:project_two/screens/option_widget_3.dart.dart';
 import 'package:project_two/screens/sample_card.dart';
 import 'package:project_two/utilts/data.dart';
 import 'package:project_two/utilts/data_two.dart';
-import 'package:project_two/models/practice.dart';
+import 'package:project_two/models/songs_model.dart';
 import 'package:project_two/utilts/text_styles.dart';
 
 class PracticePage extends StatefulWidget {
@@ -18,13 +18,6 @@ class PracticePage extends StatefulWidget {
 }
 
 class _PracticePageState extends State<PracticePage> {
-  List? recommended;
-  @override
-  void initState() {
-    recommended = recommendedSongs;
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +38,8 @@ class _PracticePageState extends State<PracticePage> {
                     scrollDirection: Axis.horizontal,
                     itemCount: sampleCardSongs.length,
                     itemBuilder: ((context, index) {
-                      Songs songs = normalSongs[index];
-                      return SampleCard(songs:songs ,
+                      //Songs songs = normalSongs[index];
+                      return SampleCard(songs:normalSongs[index] ,
                       
                       );
                     }))),
@@ -90,12 +83,6 @@ class _PracticePageState extends State<PracticePage> {
                     ],
                   ),
                 ))
-            //list of music category
-            // const MusicCategories(),
-            // SizedBox(
-            //   height: 43.h,
-            // ),
-            // const OptionsWidget2()
           ]),
         )));
   }

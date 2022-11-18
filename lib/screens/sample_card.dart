@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:project_two/models/practice.dart';
+import 'package:project_two/models/songs_model.dart';
 
 class SamplePage extends StatelessWidget {
   final Songs songs;
