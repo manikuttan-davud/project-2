@@ -3,7 +3,7 @@ List popularSongs=[
   'name':'My mind and me',
    'artist':'Selena Gomez',
    'url':
-        'https://hips.hearstapps.com/hmg-prod/images/atv-selena-gomez-my-mind-and-me-key-art-1662655192.jpg'
+        'https://resizing.flixster.com/VmAasSvOShVfTHeEIehVKJZNOqg=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzA1OWZlNzIxLTcxNWMtNGI5My1iM2RiLWM4NTRjZGVhYmZhNC5wbmc='
 },
 {
   'name':'out of my system',

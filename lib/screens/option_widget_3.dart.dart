@@ -55,7 +55,12 @@ class MusicTile extends StatelessWidget {
         width: 60.w,
         height: 60.h,
         decoration:
-            BoxDecoration(image: DecorationImage(image: NetworkImage(url))),
+            BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: DecorationImage(image: NetworkImage(url),
+              fit: BoxFit.cover,
+              )
+              ),
       ),
       title: Text(
         name,

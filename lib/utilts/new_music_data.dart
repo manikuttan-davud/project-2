@@ -1,6 +1,6 @@
 List newSongs=[
 {
-  'name':'Kesariya',
+  'name':'Wakka Wakka',
    'artist':'Rock',
    'url':
         'https://upload.wikimedia.org/wikipedia/en/7/70/Shakirasinglewc.jpg'

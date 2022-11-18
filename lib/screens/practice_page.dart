@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:project_two/screens/browsing_page.dart';
 import 'package:project_two/screens/option_widget_2.dart.dart';
 import 'package:project_two/screens/option_widget_3.dart.dart';
 import 'package:project_two/screens/sample_card.dart';
-import 'package:project_two/utilts/colors.dart';
 import 'package:project_two/utilts/data.dart';
 import 'package:project_two/utilts/data_two.dart';
+import 'package:project_two/models/practice.dart';
 import 'package:project_two/utilts/text_styles.dart';
 
 class PracticePage extends StatefulWidget {
@@ -17,21 +18,18 @@ class PracticePage extends StatefulWidget {
 }
 
 class _PracticePageState extends State<PracticePage> {
-  //TODO: This is a comment
-  //TODO: This is another comment.
   List? recommended;
-  List? sample;
   @override
   void initState() {
     recommended = recommendedSongs;
-    sample=sampleCardSongs;
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //TODO:LINEAR GRADIENT
+
         backgroundColor: const Color.fromRGBO(40, 0, 71, 1),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -42,30 +40,62 @@ class _PracticePageState extends State<PracticePage> {
             // it contains browse text
             const BrowseText(),
             SizedBox(
-              height: 250.h,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: sampleCardSongs.length,
-                  itemBuilder: ((context, index) => GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SampleCardPage()),
-                        ),
-                        child: SampleCard(
-                          category: sample?[index]['category'],
-                          name: sample![index]['name'].toString().toUpperCase(),
-                          url: sample?[index]['url'],
-                        ),
-                      ))),
-            ),
+                height: 250.h,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: sampleCardSongs.length,
+                    itemBuilder: ((context, index) {
+                      Songs songs = normalSongs[index];
+                      return SampleCard(songs:songs ,
+                      
+                      );
+                    }))),
+            DefaultTabController(
+                length: 3,
+                child: Container(
+                  color: Colors.red,
+                  width: 1.sw,
+                  height: 500,
+                  child: Column(
+                    children: [
+                      TabBar(
+                          isScrollable: true,
+                          tabs: const [
+                       
+                               
+                                 Tab(
+                                  text: 'Recommendation',
+                                ),
+                            Tab(
+                              text: "Popular",
+                            ),
+                            Tab(
+                              text: 'New Music',
+                            )
+                          ],
+                          indicator:  UnderlineTabIndicator(
+                            insets:EdgeInsets.only(right: 100.w) ,
+                            borderSide: const BorderSide(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                          )),
+                      const Expanded(
+                        child: TabBarView(children: [
+                          OptionsWidget(),
+                          OptionsWidget2(),
+                          OptionsWidget3()
+                        ]),
+                      )
+                    ],
+                  ),
+                ))
             //list of music category
-            const MusicCategories(),
-            SizedBox(
-              height: 43.h,
-            ),
-            //list of recommend music
-            const OptionsWidget(),
+            // const MusicCategories(),
+            // SizedBox(
+            //   height: 43.h,
+            // ),
+            // const OptionsWidget2()
           ]),
         )));
   }
@@ -79,17 +109,16 @@ class BrowseText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(left: 34.w, bottom: 21.h),
-        child: InkWell(
-          child: Text(
-            'Browse',
-            style: tsS16C0xW700,
-          ),
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const SampleCardPage()),
-          ),
-        ));
+      padding: EdgeInsets.only(left: 34.w, bottom: 21.h),
+      child: InkWell(
+        child: Text(
+          'BROWSE',
+          style: tsS16C0xW700,
+        ),
+        onTap: () => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const BrowsingPage())),
+      ),
+    );
   }
 }
 
@@ -103,107 +132,13 @@ class SearchAvatar extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 311.w, top: 50.h),
       child: Stack(children: [
-        CircleAvatar(
-            radius: 20.r,
-            backgroundColor: const Color.fromRGBO(225, 225, 225, 0.2)),
-        const Padding(
-          padding: EdgeInsets.all(8),
-          child: Icon(
-            Icons.search,
-            color: colorFFFFFF,
-          ),
-        )
+        SvgPicture.asset(("assets/svg/Ellipse 1.svg")),
+        Padding(
+          padding: const EdgeInsets.all(12),
+          child: SvgPicture.asset(("assets/svg/Vector.svg")),
+        ),
       ]),
     );
-  }
-}
-
-class MusicCategories extends StatefulWidget {
-  const MusicCategories({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<MusicCategories> createState() => _MusicCategoriesState();
-}
-
-class _MusicCategoriesState extends State<MusicCategories> {
-  List items = ["Recommended", "Popular", "New Music"];
-  List options = [
-    const OptionsWidget(),
-    const OptionsWidget2(),
-    const OptionsWidget3(),
-  ];
-  int current = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(25),
-      child: SizedBox(
-          height: 50.h,
-          width: 1.sw,
-          child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: ((context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      current = index;
-                      Visibility(
-                          visible: current == index, 
-                          child: options[index]);
-                    });
-                  },
-                  child: Container(
-                    width: 120.w,
-                    height: 45.h,
-                    decoration: BoxDecoration(
-                        color: current == index
-                            ? Colors.black
-                            : const Color.fromRGBO(40, 0, 71, 1),
-                        border: current == index
-                            ? Border.all(color: Colors.white)
-                            : null),
-                    child: Center(
-                        child: Text(
-                      items[index],
-                      style: tsS16C0xW700,
-                    )),
-                  ),
-                );
-              }),
-              separatorBuilder: ((context, index) {
-                return SizedBox(
-                  width: 10.w,
-                );
-              }),
-              itemCount: items.length)),
-    );
-    // Row(
-    //children: [
-    //Padding(
-    //padding: EdgeInsets.only(left: 23.w),
-    //child: Text(
-    //'Recommendation',
-    //style: tsS16C0xW700,
-    //),
-    //),
-    //SizedBox(
-    //width: 35.w,
-    //),
-    //Text(
-    //   'Popular',
-    // style: tsS14C0xW500,
-    //),
-    //SizedBox(
-    //width: 35.w,
-    //),
-    // Text(
-    //'New Music',
-    //  style: tsS14C0xW500,
-    //  ),
-    //  ],
-    //  );
   }
 }
 
@@ -256,8 +191,10 @@ class MusicTile extends StatelessWidget {
       leading: Container(
         width: 60.w,
         height: 60.h,
-        decoration:
-            BoxDecoration(image: DecorationImage(image: NetworkImage(url))),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            image:
+                DecorationImage(image: NetworkImage(url), fit: BoxFit.cover)),
       ),
       title: Text(
         name,
@@ -288,15 +225,10 @@ class MusicTile extends StatelessWidget {
 }
 
 class SampleCard extends StatelessWidget {
-  final String url;
-  final String name;
-  final String category;
-
+ final Songs songs;
   const SampleCard({
-    Key? key,
-    required this.name,
-    required this.category,
-    required this.url,
+    Key? key, required this.songs,
+  
   }) : super(key: key);
 
   @override
@@ -304,25 +236,30 @@ class SampleCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 24.w),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Container(
-          width: 132.w,
-          height: 159.h,
-          decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(url)),
-              borderRadius: BorderRadius.circular(15.r)),
-        ),
+        InkWell(
+            child: Container(
+              width: 132.w,
+              height: 159.h,
+              decoration: BoxDecoration(
+                  image: DecorationImage(image: NetworkImage(songs.url)),
+                  borderRadius: BorderRadius.circular(15.r)),
+            ),
+            onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SamplePage(songs)),
+                )),
         SizedBox(
           height: 24.h,
         ),
         Text(
-          name,
+          songs.name,
           style: tsS16C0xW700,
         ),
         SizedBox(
           height: 3.h,
         ),
         Text(
-          category,
+        songs.category,
           style: tsS12C0xW500,
         ),
       ]),

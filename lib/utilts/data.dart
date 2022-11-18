@@ -1,21 +1,21 @@
 List recommendedSongs = [
   {
-    'name': 'Born To Die',
-    'artist': 'Lena Del Rey',
+    'name': 'Kesariya',
+    'artist': 'Arjith Singh',
     'url':
-        'https://img1.hscicdn.com/image/upload/f_auto,t_ds_square_w_320,q_50/lsci/db/PICTURES/CMS/316400/316486.png'
+        'https://i.scdn.co/image/ab67616d0000b273c08202c50371e234d20caf62'
   },
   {
-    'name': 'Born To Die2',
-    'artist': 'Lena Del Rey2',
+    'name': 'Dhoom',
+    'artist': 'Athif Azlam',
     'url':
-        'https://images.hindustantimes.com/img/2022/09/02/550x309/tendulkar_mi_ipl_1650777563845_1662102044860_1662102044860.webp'
+        'https://m.media-amazon.com/images/M/MV5BM2E0NWJlNzYtZjFlZS00NDU4LWI0OTAtYTZlYjc2MmQ2MjdmXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg'
   },
   {
-    'name': 'Born To Die3',
-    'artist': 'Lena Del Rey3',
+    'name': 'Ashique 2',
+    'artist': 'Anil Kapoor',
     'url':
-        'https://upload.wikimedia.org/wikipedia/commons/2/25/Sachin_Tendulkar_at_MRF_Promotion_Event.jpg'
+        'https://static-koimoi.akamaized.net/wp-content/new-galleries/2013/04/Aashiqui-2-Movie-poster.jpg'
   }
 ];
 

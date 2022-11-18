@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:project_two/screens/browsing_page.dart';
 import 'package:project_two/screens/option_widget_2.dart.dart';
 import 'package:project_two/screens/option_widget_3.dart.dart';
 import 'package:project_two/screens/sample_card.dart';
@@ -48,7 +49,7 @@ class _TryOutPageState extends State<TryOutPage> {
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SampleCardPage()),
+                              builder: (context) => const BrowsingPage()),
                         ),
                         child: SampleCard(
                           category: sampleCardSongs[index]['category'],
@@ -87,7 +88,7 @@ class BrowseText extends StatelessWidget {
           ),
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const SampleCardPage()),
+            MaterialPageRoute(builder: (context) => const BrowsingPage()),
           ),
         ));
   }
@@ -137,15 +138,28 @@ class _MusicCategoriesState extends State<MusicCategories> with SingleTickerProv
  
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 1.sw,
-      child: TabBar(
-        controller: _tabController,
-        tabs: const [
-        Tab(text: 'Recommendation',),
-        Tab(text: 'Recommendation',),
-        Tab(text: 'Recommendation',)
-      ]),
+    return Column(
+      children: [
+        SizedBox(
+          width: 1.sw,
+          child: TabBar(
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.grey,
+            controller: _tabController,
+            tabs: const [
+            Tab(text: 'Recommendation',),
+            Tab(text: 'Recommendation',),
+            Tab(text: 'Recommendation',)
+          ]),
+        ),
+   TabBarView(
+          controller: _tabController,
+          children: const [
+               Text('hi'),
+               Text('there'),
+               Text('Here')
+        ])
+      ],
     );
     // Row(
     //children: [
