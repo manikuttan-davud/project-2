@@ -1,115 +1,14 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:project_two/models/recomended_songs_model.dart';
 import 'package:project_two/models/songs_model.dart';
+import 'package:project_two/screens/browsing_page.dart';
 import 'package:project_two/screens/sample_card.dart';
 import 'package:project_two/utilts/text_styles.dart';
 
-class MusicTile2 extends StatelessWidget {
-  final String name;
-  final String artist;
-  final String url;
-
-  const MusicTile2({
-    required this.name,
-    required this.artist,
-    required this.url,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Container(
-        width: 60.w,
-        height: 60.h,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(
-              image: NetworkImage(url),
-              fit: BoxFit.cover,
-            )),
-      ),
-      title: Text(
-        name,
-        style: tsS16C0xW600,
-      ),
-      subtitle: Padding(
-        padding: EdgeInsets.only(top: 3.h),
-        child: Text(
-          artist,
-          style: tsS13C0xW500,
-        ),
-      ),
-      trailing: SizedBox(
-        width: 30.w,
-        height: 30.h,
-        child: Row(
-          children: [
-            SvgPicture.asset("assets/svg/Ellipse 2.svg"),
-            SizedBox(
-              width: 5.w,
-            ),
-            SvgPicture.asset("assets/svg/Ellipse 2.svg")
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MusicTile3 extends StatelessWidget {
-  final String name;
-  final String artist;
-  final String url;
-
-  const MusicTile3({
-    required this.name,
-    required this.artist,
-    required this.url,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Container(
-        width: 60.w,
-        height: 60.h,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(
-              image: NetworkImage(url),
-              fit: BoxFit.cover,
-            )),
-      ),
-      title: Text(
-        name,
-        style: tsS16C0xW600,
-      ),
-      subtitle: Padding(
-        padding: EdgeInsets.only(top: 3.h),
-        child: Text(
-          artist,
-          style: tsS13C0xW500,
-        ),
-      ),
-      trailing: SizedBox(
-        width: 30.w,
-        height: 30.h,
-        child: Row(
-          children: [
-            SvgPicture.asset("assets/svg/Ellipse 2.svg"),
-            SizedBox(
-              width: 5.w,
-            ),
-            SvgPicture.asset("assets/svg/Ellipse 2.svg")
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class OptionsWidget extends StatelessWidget {
   final List<dynamic> songList;
@@ -125,12 +24,15 @@ class OptionsWidget extends StatelessWidget {
       height: 300.h,
       child: ListView.separated(
           itemBuilder: ((context, index) {
+            RecommendeSongsModel songs =
+   RecommendeSongsModel.fromJson(songList[index]);
             return Padding(
               padding: EdgeInsets.only(left: 24.h),
               child: MusicTile1(
                 url: songList[index]['url'],
                 name: songList[index]['name'].toString().toUpperCase(),
-                artist: songList[index]['artist'],
+                artist: songList[index]['artist'], 
+                songs: songs,
               ),
             );
           }),
@@ -145,36 +47,43 @@ class OptionsWidget extends StatelessWidget {
 }
 
 class MusicTile1 extends StatelessWidget {
+  final RecommendeSongsModel songs;
+  
+       
+  
   final String name;
   final String artist;
   final String url;
 
-  const MusicTile1({
+    const MusicTile1({
     required this.name,
     required this.artist,
     required this.url,
-    Key? key,
+    Key? key, required this.songs,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Container(
-        width: 60.w,
-        height: 60.h,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            image:
-                DecorationImage(image: NetworkImage(url), fit: BoxFit.cover)),
+      leading: InkWell(
+        onTap:(() =>  Navigator.push(context,MaterialPageRoute(builder: ((context) =>   BrowsingPage(songs))))),
+        child: Container(
+          width: 60.w,
+          height: 60.h,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image:
+                  DecorationImage(image: NetworkImage(songs.url), fit: BoxFit.cover)),
+        ),
       ),
       title: Text(
-        name,
+        songs.name,
         style: tsS16C0xW600,
       ),
       subtitle: Padding(
         padding: EdgeInsets.only(top: 3.h),
         child: Text(
-          artist,
+          songs.artist,
           style: tsS13C0xW500,
         ),
       ),

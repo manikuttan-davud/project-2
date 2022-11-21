@@ -43,10 +43,10 @@ class _TryOutPageState extends State<TryOutPage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: sampleCardSongs.length,
                   itemBuilder: ((context, index) => GestureDetector(
-                     //   onTap: () => Navigator.push(
-                     //     context,
+                      //  onTap: () => Navigator.push(
+                        //  context,
                        //   MaterialPageRoute(
-                       //       builder: (context) => const BrowsingPage()),
+                        ////      builder: (context) => const BrowsingPage(songs: ,)),
                       //  ),
                         child: SampleCard(
                           category: sampleCardSongs[index]['category'],
@@ -84,9 +84,9 @@ class BrowseText extends StatelessWidget {
             style: tsS16C0xW700,
           ),
        //   onTap: () => Navigator.push(
-       ///     context,
-        //    MaterialPageRoute(builder: (context) => const BrowsingPage()),
-        //  ),
+       //     context,
+       //     MaterialPageRoute(builder: (context) => const BrowsingPage()),
+       //   ),
         ));
   }
 }

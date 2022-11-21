@@ -23,52 +23,64 @@ class _HomeScreenState extends State<HomeScreen> {
             child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SearchAvatar(),
+            children: const [
+              SearchAvatar(),
               // it contains browse text
-              const BrowseText(),
+              BrowseText(),
               BrowseSongs(),
-              DefaultTabController(
-                  length: 3,
-                  child: Container(
-                    // color: Color(0x50A34BD5),
-                    width: 1.sw,
-                    height: 500,
-                    child: Column(
-                      children: [
-                        TabBar(
-                            isScrollable: true,
-                            tabs: const [
-                              Tab(
-                                text: 'Recommendation',
-                              ),
-                              Tab(
-                                text: "Popular",
-                              ),
-                              Tab(
-                                text: 'New Music',
-                              )
-                            ],
-                            indicator: UnderlineTabIndicator(
-                              insets: EdgeInsets.only(right: 100.w),
-                              borderSide: const BorderSide(
-                                color: Colors.white,
-                                width: 2,
-                              ),
-                            )),
-                        Expanded(
-                          child: TabBarView(children: [
-                            OptionsWidget(songList: recommendedSongs),
-                            OptionsWidget(songList: popularSongs),
-                            OptionsWidget(songList: newSongs),
-                          ]),
-                        )
-                      ],
-                    ),
-                  ))
+              TabController()
             ],
           ),
         )));
+  }
+}
+
+class TabController extends StatelessWidget {
+  const TabController({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+        length: 3,
+        child: SizedBox(
+          // color: Color(0x50A34BD5),
+          width: 1.sw,
+          height: 500,
+          child: Column(
+            children: [
+              TabBar(
+                  isScrollable: true,
+                  tabs: const [
+                    Tab(
+                      text: 'Recommendation',
+                    ),
+                    Tab(
+                      text: "Popular",
+                    ),
+                    Tab(
+                      text: 'New Music',
+                    )
+                  ],
+                  indicator: UnderlineTabIndicator(
+                    insets: EdgeInsets.only(right: 100.w),
+                    borderSide: const BorderSide(
+                      color: Colors.white,
+                      width: 2,
+                    ),
+                  )),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                  OptionsWidget(songList: recommendedSongs),
+                  OptionsWidget(songList: popularSongs),
+                  OptionsWidget(songList: newSongs),
+                ]),
+              )
+            ],
+          ),
+        ));
   }
 }
 
@@ -108,8 +120,8 @@ class BrowseText extends StatelessWidget {
           'BROWSE',
           style: tsS16C0xW700,
         ),
-        onTap: () => Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const BrowsingPage())),
+      //  onTap: () => Navigator.push(context,
+      //      MaterialPageRoute(builder: (context) => const BrowsingPage())),
       ),
     );
   }
