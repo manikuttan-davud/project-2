@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:project_two/models/songs_model.dart';
 
 class SamplePage extends StatelessWidget {
-  final Songs songs;
-  SamplePage(  this.songs, {super.key});
+  final BrowseSongsModel songs;
+  SamplePage(this.songs, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,13 @@ class SamplePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(songs.url),
-            const SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             Text(songs.name.toString().toUpperCase()),
-             const SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             Text(songs.category)
           ],
         ),
